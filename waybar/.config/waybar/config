@@ -1,0 +1,116 @@
+{
+  "layer": "top",
+
+    "modules-left": [
+      "river/tags",
+    "sway/workspaces", 
+    "sway/window", 
+    "sway/mode"
+    ],
+
+    "modules-center": [
+      "custom/left-arrow-gray",
+    "clock#1",
+    "custom/right-arrow-gray",
+    "custom/left-arrow-gray",
+    "clock#2",
+    "custom/right-arrow-gray",
+    "custom/left-arrow-gray",
+    "clock#3",
+    "custom/right-arrow-gray"
+    ],
+
+    "modules-right": [
+      "custom/semicircle-separator",
+    "network", 
+    "custom/light-semicircle-separator",
+    "pulseaudio", 
+    "custom/dark-semicircle-separator",
+    "battery", 
+    "custom/light-semicircle-separator",
+    "tray"
+    ],
+
+    "sway/window": {
+      "max-length": 50
+    },
+
+    "battery": {
+      "format": "{icon} {capacity}% ",
+      "format-icons": [" ", " ", " ", " ", " "],
+      "on-click": "pwrmenu" 
+    },
+
+    "clock#1": {
+      "format": "{:%a}",
+      "tooltip": false
+    },
+
+    "clock#2": {
+      "format": "{:%l:%M %P}",
+      "tooltip": false
+    },
+
+    "clock#3": {
+      "format": "{:%b %d}",
+      "tooltip": false
+    },
+
+    "network": {
+      "format-wifi": "︁  {essid}",
+      "format-disconnected": "︁ ",
+      "tooltip-format-wifi": "{signalStrength}%",
+      "tooltip-format-disconnected": "Disconnected",
+      "on-click": "alacritty -e network"
+    },
+
+    "pulseaudio": {
+      "format": "{icon} {volume}%",
+      "format-bluetooth": " {icon} {volume}% ",
+      "format-muted": "",
+      "format-icons": {
+        "default": [" ", " "]
+      },
+      "on-click": "alacritty -e 'pulsemixer'"
+    },
+
+    "tray": {
+      "spacing": 10
+    },
+
+    "river/tags": {
+      "num-tags" : 9
+    },
+
+    "custom/left-arrow-gray": {
+      "format": "",
+      "tooltip": false
+    },
+
+    "custom/right-arrow-gray": {
+      "format": "",
+      "tooltip": false
+    },
+
+    "custom/left-arrow-tray-gray": {
+      "format": "",
+      "tooltip": false
+    },
+
+    "custom/light-semicircle-separator": {
+      "format": "",
+      "tooltip": false
+    },
+
+    "custom/dark-semicircle-separator": {
+      "format": "",
+      "tooltip": false
+    },
+
+    "custom/semicircle-separator": {
+      "format": "",
+      "tooltip": false
+    },
+
+}
+

@@ -1,0 +1,9 @@
+[Default Applications]
+image/gif=imv.desktop
+image/png=imv.desktop
+image/jpg=imv.desktop
+image/jpeg=imv.desktop
+video/mp4=mpv.desktop
+text/plain=nvim.desktop
+inode/x-empty=nvim.desktop
+application/octet-stream=nvim.desktop

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+sudo rfkill unblock bluetooth
+bluetoothctl power on
+bluetoothctl connect CC:A7:C1:FA:9D:51

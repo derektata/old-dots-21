@@ -1,0 +1,62 @@
+
+# Pacman/Yay Commands
+alias pS='sudo pacman -S'
+alias pSyu='sudo pacman -Syu'
+alias pSs='sudo pacman -Ss'
+alias pSyy='sudo pacman -Syy'
+alias pRns='sudo pacman -Rns'
+alias pQ='pacman -Q'
+
+# System status
+alias htop='btm'
+alias top='btm'
+
+# Filesystem Movement
+alias '~'='cd ~'
+alias dl='cd ~/downloads'
+alias ba='cd ~/.config/bash'
+alias bin='cd ~/.local/bin'
+alias dot='cd ~/.dots'
+alias nvc='cd ~/.config/nvim'
+alias nvd='cd ~/.local/share/nvim'
+alias nvp='cd ~/.local/share/nvim/site/pack/packer/start'
+alias proj='cd ~/code'
+alias repo='cd ~/repos'
+alias nx='cd ~/notes'
+alias sw='cd ~/.config/sway'
+alias rv='cd ~/.config/river'
+alias '..'='cd ..'
+alias '...'='cd ../..'
+
+# Filesystem Viewing
+alias ls='exa --all --icons --group-directories-first'
+alias ll='exa --header --all --long --icons --group-directories-first --git'
+alias cat='bat'
+
+# Applications
+alias v='nvim'
+alias vpd='nvim --cmd "set rtp+=./"'
+alias bt='bluetoof'
+alias btctl='bluetoothctl'
+# alias wifi='nmcli device wifi rescan; echo "Scanning local WiFi, Please wait..."; sleep 3; nmtui'
+alias pm='pulsemixer'
+
+# Screen Recording
+alias rec='wf-recorder'
+alias recs='wf-recorder -g "$(slurp)"'
+alias reca='wf-recorder --audio --file=audio.mp4'
+
+# Python Virtual Environment 
+alias actv='source venv/bin/activate'
+alias dactv='deactivate'
+
+# GRUB
+alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
+
+### Random Aliases
+# Weather
+alias wx='curl wttr.in'
+
+# ArcWelder
+alias aw='~/.local/share/ArcWelder/bin/ArcWelder'
+

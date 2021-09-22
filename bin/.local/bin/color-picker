@@ -1,0 +1,4 @@
+#!/bin/sh
+#Screen color picker using Grim & ImageMagick, then copy hex code to clipboard
+
+grim -g "$(slurp -p)" -t ppm - | convert - -format '%[pixel:p{0,0}]' txt:- | awk '{ print $3 }' | tail -n 1 | xargs wl-copy

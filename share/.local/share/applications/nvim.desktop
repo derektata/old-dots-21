@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Version=0.5.0-1
+Type=Application
+Terminal=true
+Exec=/usr/bin/nvim
+Name=Nvim
+Icon=/home/derek/.local/share/icons/neovim.png

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+nmcli device wifi rescan; echo "Scanning local WiFi, Please wait..."; sleep 5; nmtui
+

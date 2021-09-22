@@ -1,0 +1,18 @@
+export LF_COLORS="\
+~/code=01;35:\
+~/docs=01;35:\
+~/downloads=01;35:\
+~/.local/share=01;35:\
+~/.config/lf/lfrc=35:\
+notes/=01;35:\
+.git/=1;33:\
+.git=32:\
+.gitignore=32:\
+Makefile=32:\
+README.*=33:\
+*.txt=34:\
+*.md=34:\
+ln=01;36:\
+di=01;34:\
+ex=01;32:\
+"

@@ -1,0 +1,115 @@
+#!/bin/sh
+
+check_stow(){
+  if [[ -f /bin/stow ]]; then
+    return
+  else
+    clear
+    printf "\nYou need to install 'stow' to use this script. Install? (y/n)\n"; read a;
+    case $a in
+      y) sudo pacman -Sy stow
+        ;;
+      n) exit 0
+        ;;
+      *) check_stow
+        ;;
+    esac
+  fi
+}
+check_stow
+
+install_dots(){
+  stow alacritty &
+  stow bash &
+  stow bat &
+  stow bin &
+  stow config &
+  stow lf &
+  stow mako &
+  stow neofetch &
+  stow nvim &
+  stow river &
+  stow share &
+  stow sway &
+  stow waybar &
+  stow wofi &
+  printf "\ndotfiles installed\n"
+}
+
+remove_dots(){
+  stow -D alacritty &
+  stow -D bash &
+  stow -D bat &
+  stow -D bin &
+  stow -D config &
+  stow -D lf &
+  stow -D mako &
+  stow -D neofetch &
+  stow -D nvim &
+  stow -D river &
+  stow -D share &
+  stow -D sway &
+  stow -D waybar &
+  stow -D wofi &
+  printf "\ndotfiles removed\n"
+}
+
+check_git(){
+  if [[ -f /bin/git ]]; then
+    return
+  else
+    clear
+    printf "\nYou need to install 'git' to use this script. Install? (y/n)\n"; read a;
+    case $a in
+      y) sudo pacman -Sy git
+        ;;
+      n) exit 0
+        ;;
+      *) check_git
+        ;;
+    esac
+  fi
+}
+
+install_paru(){
+  check_git
+  if [[ -d ./paru ]]; then
+    printf "\nparu is already installed\n"
+  else
+    sudo pacman -S --needed base-devel
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si
+  fi
+}
+
+cat << Options
+
+Welcome to Derek's Dotfiles!
+
+Please select an option:
+
+1) install dots
+2) remove dots
+3) install aur (paru)
+
+Options
+
+read answer;
+
+case $answer in
+
+  1) install_dots
+    ;;
+
+  2) remove_dots
+    ;;
+
+  3) install_paru
+    ;;
+
+  *) printf "\nNot an option...Aborting!\n"
+    ;;
+
+  esac
+
