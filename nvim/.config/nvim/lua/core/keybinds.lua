@@ -61,8 +61,8 @@ key("n", "<A-`>", ":ToggleTerm<CR>", opts)
 -- Open Diagnostics
 key("n", "<Leader>d", ":TroubleToggle<CR>", opts)
 
--- Open Markdown Preview
-key("n", "<Leader>p", ":MarkdownPreviewToggle<CR>", opts)
+-- Open Markdown Preview via Glow
+key("n", "<Leader>p", ":Glow<CR>", opts)
 
 -- Toggle Table Mode
 key("n", "TM", ":TableModeToggle<CR>", opts)
