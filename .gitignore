@@ -4,4 +4,8 @@ my-fonts/
 
 # Other stuff
 nvim/.config/nvim/plugin
+bin/.local/bin/LICENSE
+bin/.local/bin/README.md
+bin/.local/bin/glow
 paru/
+
