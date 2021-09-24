@@ -19,7 +19,6 @@ map mr sudomkfile
 map md mkdir
 map ms $mkscript
 map mb chmod
-# map o open_config
 map br bulk-rename
 map r rename
 map H top
@@ -36,9 +35,7 @@ map tr restore_trash
 # Archive Mappings
 map az zip
 map at tar
-map ag targz
-map ab targz
-map au unarchive
+map ae extract
 
 # Fuzzy Mappings
 map fj :fzf_jump
@@ -65,94 +62,111 @@ map cs cd ~/.local/share
 
 # General file system commands
 cmd open ${{
-    case $(file --mime-type "$f" -bL) in
-        text/*|application/json) $EDITOR "$f";;
-        video/*|image/*/application/pdf) xdg-open "$f";;
-        *) xdg-open "$f" ;;
-    esac
+  case $(file --mime-type "$f" -bL) in
+    text/*|application/json) $EDITOR "$f";;
+    video/*|image/*/application/pdf) xdg-open "$f";;
+    *) xdg-open "$f" ;;
+  esac
 }}
 
-# cmd open_config  ${{
-#   $EDITOR $(bookmenu -b ~/.config/bookmenu/configs -f fzf -o)
-# }}
 
 cmd mkdir ${{
-  printf "Directory Name: "
+  printf "\nDirectory Name: "
   read ans
   mkdir $ans
 }}
 
 cmd mkfile ${{
-  printf "File Name: "
+  printf "\nFile Name: "
   read ans
   $EDITOR $ans
 }}
 
 cmd chmod ${{
-  printf "Mode Bits: "
+  printf "\nModify Bits: "
   read ans
 
   for file in "$fx"
   do
-    chmod $ans $file
+  chmod $ans $file
   done
-  
+
   lf -remote 'send reload'
 }}
 
 cmd sudomkfile ${{
-  printf "File Name: "
+  printf "\nFile Name: "
   read ans
   sudo $EDITOR $ans
 }}
 
 # Edit filename before the extension
 cmd edit-filename ${{
-	# get 'basename' of the selection
-	filename="${f##*/}"
-	# quote it so we won't deal with quotes in the lf -remote command
-	filename="$(printf '%q' "$filename")"
-	filename="${filename// /<space>}"
-	lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
+  # get 'basename' of the selection
+  filename="${f##*/}"
+  # quote it so we won't deal with quotes in the lf -remote command
+  filename="$(printf '%q' "$filename")"
+  filename="${filename// /<space>}"
+  lf -remote "send $id push :rename<space>$filename<a-b><c-b>"
 }}
 
+# bulk rename files
 cmd bulk-rename ${{
-    old="$(mktemp)"
+  old="$(mktemp)"
     new="$(mktemp)"
     [ -n "$fs" ] && fs="$(ls)"
     printf '%s\n' "$fs" >"$old"
-    printf '%s\n' "$fs" >"$new"
-    $EDITOR "$new"
-    [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
-    paste "$old" "$new" | while IFS= read -r names; do
+      printf '%s\n' "$fs" >"$new"
+      $EDITOR "$new"
+      [ "$(wc -l < "$new")" -ne "$(wc -l < "$old")" ] && exit
+      paste "$old" "$new" | while IFS= read -r names; do
         src="$(printf '%s' "$names" | cut -f1)"
         dst="$(printf '%s' "$names" | cut -f2)"
         if [ "$src" = "$dst" ] || [ -e "$dst" ]; then
-            continue
+          continue
         fi
         mv -- "$src" "$dst"
-    done
-    rm -- "$old" "$new"
-    lf -remote "send $id unselect"
+      done
+      rm -- "$old" "$new"
+      lf -remote "send $id unselect"
 }}
 
 
-# Archive Commands
-cmd unarchive ${{
+# extract the current file with the right command
+# (xkcd link: https://xkcd.com/1168/)
+cmd extract ${{
+  set -f
   case "$f" in
-    *.zip) unzip "$f" ;;
-    *.tar.gz) tar -xzvf "$f" ;;
-    *.tar.bz2) tar -xjvf "$f" ;;
-    *.tar) tar -xvf "$f" ;;
+    *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf "$f" ;;
+    *.tar.gz|*.tgz) tar xzvf "$f" ;;
+    *.tar.xz|*.txz) tar xJvf "$f" ;;
     *.img.xz) unxz "$f" ;;
-    *) echo "Unsupported format" ;;
-    esac
+    *.zip) unzip "$f" ;;
+    *.rar) unrar x "$f" ;;
+    *.7z) 7z x "$f" ;;
+  esac
 }}
 
-cmd zip %zip -r "$f" "$f"
-cmd tar %tar cvf "$f.tar" "$f"
-cmd targz %tar cvzf "$f.tar.gz" "$f"
-cmd tarbz2 %tar cjvf "$f.tar.bz2" "$f"
+
+# compress current file or selected files with tar and gunzip
+cmd tar ${{
+  set -f
+    mkdir "$f"
+    cp -r "$f" "$f"
+    tar czf "$f.tar.gz" "$f"
+    rm -rf "$f"
+}}
+
+
+# compress current file or selected files with zip
+cmd zip ${{
+  set -f
+    mkdir "$f"
+    cp -r "$f" "$f"
+    zip -r "$f.zip" "$f"
+    rm -rf "$f"
+}}
+
 
 # Trash Commands
 cmd trash ${{
@@ -174,37 +188,41 @@ cmd trash ${{
   done
 }}
 
+
 # Git Commands
 cmd git_branch ${{
-    git branch | fzf | xargs git checkout 
-    pwd_shell=$(pwd)
-    lf -remote "send $id updir"
-    lf -remote "send $id cd \"$pwd_shell\""
+  git branch | fzf | xargs git checkout 
+  pwd_shell=$(pwd)
+  lf -remote "send $id updir"
+  lf -remote "send $id cd \"$pwd_shell\""
 }}
 
 cmd on-cd &{{
-    # display git repository status in your prompt
-    source /usr/share/git/completion/git-prompt.sh
-    GIT_PS1_SHOWDIRTYSTATE=auto
-    GIT_PS1_SHOWSTASHSTATE=auto
-    GIT_PS1_SHOWUNTRACKEDFILES=auto
-    GIT_PS1_SHOWUPSTREAM=auto
-    GIT_PS1_COMPRESSSPARSESTATE=auto
-    git=$(__git_ps1 " [ %s]") || true
-    fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
-    lf -remote "send $id set promptfmt \"$fmt\""
+# display git repository status in your prompt
+  source /usr/share/git/completion/git-prompt.sh
+  GIT_PS1_SHOWDIRTYSTATE=auto
+  GIT_PS1_SHOWSTASHSTATE=auto
+  GIT_PS1_SHOWUNTRACKEDFILES=auto
+  GIT_PS1_SHOWUPSTREAM=auto
+  GIT_PS1_COMPRESSSPARSESTATE=auto
+  git=$(__git_ps1 " [ %s]") || true
+  fmt="\033[32;1m%u@%h\033[0m:\033[34;1m%w\033[0m\033[33;1m$git\033[0m"
+  lf -remote "send $id set promptfmt \"$fmt\""
 }}
+
 
 # FZF Commands
 cmd fzf_jump ${{
-    res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
-    if [ -d "$res" ]; then
-        cmd="cd"
-    else 
-        cmd="select"                                                       
-    fi
-    lf -remote "send $id $cmd \"$res\""
+  res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
+  if [ -d "$res" ]; then
+    cmd="cd"
+  else 
+    cmd="select"                                                       
+  fi
+
+  lf -remote "send $id $cmd \"$res\""
 }}
+
 
 # Remove some defaults
 map "'"
