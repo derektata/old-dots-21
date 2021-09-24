@@ -5,3 +5,4 @@ gamma &
 bluetoof &
 brightnessctl s 65% &
 dbus-update-activation-environment --systemd --all &
+# waybar &
