@@ -125,20 +125,6 @@ return packer.startup(function()
   -- Popup
   use { "nvim-lua/popup.nvim" }
 
-  -- Terminal Wrapper
-  use {
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("plugins.configs.others").tty()
-    end,
-  }
-
-  -- Markdown Preview
-  use {
-    "iamcco/markdown-preview.nvim",
-    run = "cd app && yarn install",
-  }
-
   -- Colorizer
   use {
     "norcalli/nvim-colorizer.lua",
@@ -161,9 +147,6 @@ return packer.startup(function()
   -- Vim Surround
   use { "tpope/vim-surround" }
 
-  -- Table Mode
-  use { "dhruvasagar/vim-table-mode" }
-
   -- Neorg / Org Mode
   use {
     "nvim-neorg/neorg",
@@ -171,14 +154,6 @@ return packer.startup(function()
       require("plugins.configs.others").neorg()
     end,
     requires = "nvim-lua/plenary.nvim",
-  }
-
-  -- Toggle wrap like in VS Code
-  use {
-    "derektata/wrap-toggle.nvim",
-    config = function()
-      require("wrap-toggle").setup()
-    end,
   }
 
   -- Vim motions
@@ -190,4 +165,31 @@ return packer.startup(function()
       require("hop").setup { keys = "etovxqpdygfblzhckisuran" }
     end,
   }
+
+  ---- EXTRAS ----
+
+  -- Terminal Wrapper
+  use {
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require("plugins.configs.others").tty()
+    end,
+  }
+
+  -- Glow (Markdown Preview)
+  use {
+    "npxbr/glow.nvim",
+    run = "GlowInstall",
+  }
+
+  -- Toggle wrap like in VS Code
+  use {
+    "derektata/wrap-toggle.nvim",
+    config = function()
+      require("wrap-toggle").setup()
+    end,
+  }
+
+  -- Table Mode
+  use { "dhruvasagar/vim-table-mode" }
 end)
