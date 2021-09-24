@@ -1,11 +1,11 @@
 
 # Pacman/Yay Commands
-alias pS='sudo pacman -S'
+# alias pS='sudo pacman -S'
 alias pSyu='sudo pacman -Syu'
 alias pSs='sudo pacman -Ss'
 alias pSyy='sudo pacman -Syy'
-alias pRns='sudo pacman -Rns'
-alias pQ='pacman -Q'
+# alias pRns='sudo pacman -Rns'
+# alias pQ='pacman -Q'
 
 # System status
 alias htop='btm'
