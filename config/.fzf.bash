@@ -29,7 +29,7 @@ fman() {
 # search for fonts installed on the system
 # ------------
 ffont() {
-  fc-cache && fc-list | fzf -q "$1" --prompt='search fonts> '
+  fc-cache && fc-list | awk -F "/" '{ print $NF }' |fzf -q "$1" --prompt='search fonts> '
 }
 
 
@@ -61,9 +61,9 @@ ff() {
 fkill() {
   local pid
   if [ "$UID" != "0" ]; then
-    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{ print $2 }')
   else
-    pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    pid=$(ps -ef | sed 1d | fzf -m | awk '{ print $2 }')
   fi
 
   if [ "x$pid" != "x" ]
@@ -79,28 +79,38 @@ fbr() {
   local branches branch
   branches=$(git --no-pager branch -vv) &&
     branch=$(echo "$branches" | fzf +m) &&
-    git checkout $(echo "$branch" | awk '{print $1}' | sed "s/.* //")
+    git checkout $(echo "$branch" | awk '{ print $1 }' | sed "s/.* //")
   }
 
 
 # pacman install
 # ------------
-pacs() {
-  pacman -Slq | fzf -q "$1" -m --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S
+pS() {
+  pacman -Slq | fzf -q "$1" -m --preview 'pacman -Si {1}' --prompt='pacman -S > ' | xargs -ro sudo pacman -S
+}
+
+# pacman remove
+# ------------
+pRns() {
+  pacman -Qq | fzf -q "$1" -m --preview 'pacman -Qi {1}' --prompt='pacman -Rns > ' | xargs -ro sudo pacman -Rns
+}
+
+pQ() {
+  pacman -Qq | fzf -q "$1" -m --preview 'pacman -Qi {1}' --prompt='pacman -Q > '
 }
 
 
 # paru install
 # ------------
-pars() {
-  paru -Slq | fzf -q "$1" -m --preview 'paru -Si {1}' | xargs -ro paru -S
+parS() {
+  paru -Slq | fzf -q "$1" -m --preview 'paru -Si {1}' --prompt='paru -S > ' | xargs -ro paru -S
 }
 
 
 #paru remove
 # ------------
-parm() {
-  paru -Qq | fzf -q "$1" -m --preview 'paru -Qi {1}' | xargs -ro paru -Rns
+parR() {
+  paru -Qq | fzf -q "$1" -m --preview 'paru -Qi {1}' --prompt='paru -Rns > ' | xargs -ro paru -Rns
 }
 
 
