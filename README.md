@@ -8,7 +8,7 @@ dotfiles for my comfy linux abode
 
 - wayland apps
 - terminal based workflow
-- menus based on [fzf] 
+- menus based on [fzf]
   - search man pages, fonts, packages installed
   - use `pacman`/`paru` to search for packages to install/remove
   - run node scripts
