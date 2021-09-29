@@ -35,3 +35,7 @@ fi
 # if [ "$(tty)" = "/dev/tty1" ]; then
 # 	exec dwl -s dwlapps
 # fi
+
+# if [ "$(tty)" = "/dev/tty1" ]; then
+# 	exec kiwmi
+# fi
