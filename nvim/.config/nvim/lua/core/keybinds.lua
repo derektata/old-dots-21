@@ -39,9 +39,6 @@ key("n", "gcc", "<Plug>kommentary_line_default", opts)
 -- Comment Visual
 key("v", "gc", "<Plug>kommentary_visual_default", opts)
 
--- Fix Whitespace
-key("n", "<Leader>fw", ":FixWhitespace<CR>", opts)
-
 -- Escape insert mode
 key("i", "jj", "<Esc>", {})
 key("i", "jk", "<Esc>", {})
@@ -54,9 +51,6 @@ key("n", "<A-h>", ":noh<CR>", opts)
 
 -- Open Terminal Tab
 -- map('n', '<C-\\>', ':tabnew<CR>:terminal<CR>i', {})
-
--- Toggle Term
-key("n", "<A-`>", ":ToggleTerm<CR>", opts)
 
 -- Open Diagnostics
 key("n", "<Leader>d", ":TroubleToggle<CR>", opts)
