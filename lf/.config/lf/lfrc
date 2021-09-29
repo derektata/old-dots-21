@@ -1,5 +1,6 @@
 # Basic Settings
 set preview true
+set previewer ~/.config/lf/preview.sh
 set hidden true
 # set color256 true
 # set drawbox true
@@ -59,6 +60,7 @@ map cn cd ~/.config/nvim
 map cN cd ~/docs/notes
 map cr cd ~/repos
 map cs cd ~/.local/share
+
 
 # General file system commands
 cmd open ${{
@@ -188,10 +190,15 @@ cmd trash ${{
   done
 }}
 
+cmd clear_trash %trash-empty
+
+cmd restore_trash ${{
+  trash-restore
+}}
 
 # Git Commands
 cmd git_branch ${{
-  git branch | fzf | xargs git checkout 
+  git branch | fzf | xargs git checkout
   pwd_shell=$(pwd)
   lf -remote "send $id updir"
   lf -remote "send $id cd \"$pwd_shell\""
@@ -216,8 +223,8 @@ cmd fzf_jump ${{
   res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location' | sed 's/\\/\\\\/g;s/"/\\"/g')"
   if [ -d "$res" ]; then
     cmd="cd"
-  else 
-    cmd="select"                                                       
+  else
+    cmd="select"
   fi
 
   lf -remote "send $id $cmd \"$res\""
