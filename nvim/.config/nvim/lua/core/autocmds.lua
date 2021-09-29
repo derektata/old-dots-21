@@ -21,7 +21,13 @@ cmd [[
   cnoreabbrev Qall qall
 ]]
 
--- Trim whitespace
+-- Save file as sudo on files that require root permission
 cmd [[
-  command! FixWhitespace :%s/\s\+$//e
+  cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
+]]
+
+-- Automatically trim whitespace
+cmd [[
+  autocmd BufWritePre * %s/\s\+$//e
+  autocmd BufWritePre * %s/\n\+\%$//e
 ]]
