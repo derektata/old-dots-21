@@ -1,6 +1,7 @@
 # Private stuff
 bin/.local/bin/gamma
 my-fonts/
+personal/
 
 # Other stuff
 nvim/.config/nvim/plugin
