@@ -5,6 +5,7 @@ personal/
 
 # Other stuff
 nvim/.config/nvim/plugin
+bin/.local/bin/pkg
 bin/.local/bin/LICENSE
 bin/.local/bin/README.md
 bin/.local/bin/glow
