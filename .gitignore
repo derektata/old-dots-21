@@ -7,5 +7,5 @@ nvim/.config/nvim/plugin
 bin/.local/bin/LICENSE
 bin/.local/bin/README.md
 bin/.local/bin/glow
+bin/.local/bin/swallow
 paru/
-
