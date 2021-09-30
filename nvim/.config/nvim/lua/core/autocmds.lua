@@ -21,11 +21,6 @@ cmd [[
   cnoreabbrev Qall qall
 ]]
 
--- Save file as sudo on files that require root permission
-cmd [[
-  cnoremap w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
-]]
-
 -- Automatically trim whitespace
 cmd [[
   autocmd BufWritePre * %s/\s\+$//e

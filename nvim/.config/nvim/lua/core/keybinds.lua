@@ -6,10 +6,10 @@ local opts = { noremap = true, silent = true }
 g.mapleader = " "
 
 -- Window Control
-key("n", "<leader>w", "<C-w>", {})
+key("n", "<leader>w", "<C-w>", opts)
 
 -- Quit window
-key("n", "<C-q>", ":q<CR>", {})
+key("n", "<C-q>", ":q!<CR>", opts)
 
 -- Switch tabs
 key("n", "<Tab>", ":tabnext<CR>", opts)
@@ -19,6 +19,9 @@ key("n", "bc", ":bd!<CR>", opts)
 
 -- Save file
 key("n", "<C-s>", ":w<CR>", opts)
+
+-- Save file as sudo on files that require root permission (Cmd Mode)
+key("c", "w!!", ":execute 'silent! write !sudo tee % >/dev/null' <bar> edit!<CR>", opts)
 
 -- Moving text
 key("n", "<leader>k", ":m .-2<CR>==", opts) -- up
