@@ -5,4 +5,3 @@ require("core.options").setup()
 require "plugins"
 
 -- Testing
---
