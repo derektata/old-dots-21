@@ -2,7 +2,7 @@
 
 option=$(echo "logout
 restart
-shutdown" | wofi -d -p "Power Menu:")
+shutdown" | bemenu -p "Power Menu:" --tf "#282828" --tb "#FB4934" --fb "#282828" --nb "#282828" --hf "#FABD2F" --hb "#282828")
 [[ -z $option ]] && exit
 
 case $option in
