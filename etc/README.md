@@ -1,3 +1,3 @@
-# /etc/environment
+# /etc/
 
-This is an example of my wayland environment file
+The files in this folder are examples
