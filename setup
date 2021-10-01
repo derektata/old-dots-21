@@ -1,13 +1,40 @@
 #!/bin/sh
 
+DOAS=/usr/bin/doas
+
+help(){
+  cat << help
+
+  Help Menu
+
+  Usage: ./setup [command]
+  Commands:
+  install       install dotfiles
+  remove        remove dotfiles
+  aur           install paru
+  -h|--h|help   displays this menu
+
+  Running this script without a command will display
+  a menu and allow you to select an option from a menu.
+
+help
+}
+
 check_stow(){
   if [[ -f /bin/stow ]]; then
     return
   else
     clear
-    printf "\nYou need to install 'stow' to use this script. Install? (y/n)\n"; read a;
+    echo "You need to install 'stow' to use this script. Install? (y/n)"; read -r a;
     case $a in
-      y) sudo pacman -Sy stow
+      y)
+        if [ -x "$DOAS" ]; then
+          echo "using doas"
+          doas pacman -Sy stow
+        elif [ ! -x "$DOAS" ]; then
+          echo "using sudo"
+          sudo pacman -Sy stow
+        fi
         ;;
       n) exit 0
         ;;
@@ -33,7 +60,7 @@ install_dots(){
   stow sway &
   stow waybar &
   stow wofi &
-  printf "\ndotfiles installed\n"
+  echo "dotfiles installed"
 }
 
 remove_dots(){
@@ -51,7 +78,7 @@ remove_dots(){
   stow -D sway &
   stow -D waybar &
   stow -D wofi &
-  printf "\ndotfiles removed\n"
+  echo "dotfiles removed"
 }
 
 check_git(){
@@ -59,9 +86,16 @@ check_git(){
     return
   else
     clear
-    printf "\nYou need to install 'git' to use this script. Install? (y/n)\n"; read a;
+    echo "You need to install 'git' to use this script. Install? (y/n)"; read -r a;
     case $a in
-      y) sudo pacman -Sy git
+      y)
+        if [ -x "$DOAS" ]; then
+          echo "using doas"
+          doas pacman -Sy git
+        elif [ ! -x "$DOAS" ]; then
+          echo "using sudo"
+          sudo pacman -Sy git
+        fi
         ;;
       n) exit 0
         ;;
@@ -76,40 +110,67 @@ install_paru(){
   if [[ -d ./paru ]]; then
     printf "\nparu is already installed\n"
   else
-    sudo pacman -S --needed base-devel
+    if [ -x "$DOAS" ]; then
+      echo "using doas"
+      doas pacman -Sy --needed base-devel
+    elif [ ! -x "$DOAS" ]; then
+      echo "using sudo"
+      sudo pacman -Sy --needed base-devel
+    fi
     git clone https://aur.archlinux.org/paru.git
     cd paru
     makepkg -si
   fi
 }
 
-cat << Options
+menu(){
+  cat << options
 
-Welcome to Derek's Dotfiles!
+  Welcome to Derek's Dotfiles!
 
-Please select an option:
+  Please select an option:
 
-1) install dots
-2) remove dots
-3) install aur (paru)
+  1) install dots
+  2) remove dots
+  3) install aur (paru)
 
-Options
+  Ctrl-c to quit
 
-read answer;
+options
 
-case $answer in
+  read -r answer;
 
-  1) install_dots
+  case $answer in
+
+    1) install_dots
+      ;;
+
+    2) remove_dots
+      ;;
+
+    3) install_paru
+      ;;
+
+    *) echo "not an option...aborting!"
+      ;;
+
+    esac
+  }
+
+case $1 in
+  install)
+    install_dots
     ;;
-
-  2) remove_dots
+  remove)
+    remove_dots
     ;;
-
-  3) install_paru
+  aur)
+    install_paru
     ;;
-
-  *) printf "\nNot an option...Aborting!\n"
+  -h|--h|help)
+    help
     ;;
-
-  esac
-
+  *)
+    menu
+    ;;
+esac
