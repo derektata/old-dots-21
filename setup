@@ -2,12 +2,13 @@
 
 DOAS=/usr/bin/doas
 
-help(){
-  cat << help
+help_menu(){
+  cat << halp
 
   Help Menu
 
   Usage: ./setup [command]
+
   Commands:
   install       install dotfiles
   remove        remove dotfiles
@@ -17,7 +18,7 @@ help(){
   Running this script without a command will display
   a menu and allow you to select an option.
 
-help
+halp
 }
 
 check_stow(){
@@ -168,7 +169,7 @@ case $1 in
     install_paru
     ;;
   -h|--h|help)
-    help
+    help_menu
     ;;
   *)
     menu
