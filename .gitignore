@@ -11,3 +11,4 @@ bin/.local/bin/README.md
 bin/.local/bin/glow
 bin/.local/bin/swallow
 paru/
+pkg/
