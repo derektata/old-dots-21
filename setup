@@ -122,7 +122,7 @@ install_paru(){
       sudo pacman -Sy --needed base-devel
     fi
     git clone https://aur.archlinux.org/paru.git
-    cd paru
+    cd paru || return
     makepkg -si
   fi
 }
