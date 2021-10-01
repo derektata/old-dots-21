@@ -1,6 +1,9 @@
 #!/bin/sh
 
 DOAS=/usr/bin/doas
+GIT=/usr/bin/git
+PARU=./paru
+STOW=/usr/bin/stow
 
 help_menu(){
   cat << halp
@@ -22,7 +25,7 @@ halp
 }
 
 check_stow(){
-  if [[ -f /bin/stow ]]; then
+  if [ -f "$STOW" ]; then
     return
   else
     clear
@@ -83,7 +86,7 @@ remove_dots(){
 }
 
 check_git(){
-  if [[ -f /bin/git ]]; then
+  if [ -f "$GIT" ]; then
     return
   else
     clear
@@ -108,7 +111,7 @@ check_git(){
 
 install_paru(){
   check_git
-  if [[ -d ./paru ]]; then
+  if [ -d "$PARU" ]; then
     printf "\nparu is already installed\n"
   else
     if [ -x "$DOAS" ]; then
