@@ -15,7 +15,7 @@ help(){
   -h|--h|help   displays this menu
 
   Running this script without a command will display
-  a menu and allow you to select an option from a menu.
+  a menu and allow you to select an option.
 
 help
 }
