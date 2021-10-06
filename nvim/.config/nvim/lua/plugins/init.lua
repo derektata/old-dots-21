@@ -193,4 +193,11 @@ return packer.startup(function()
 
   -- Table Mode
   use { "dhruvasagar/vim-table-mode" }
+
+  -- Firefox Integration
+  use {
+    'glacambre/firenvim',
+    run = function() vim.fn['firenvim#install'](0) end
+  }
+
 end)
