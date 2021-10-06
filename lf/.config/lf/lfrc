@@ -66,8 +66,8 @@ map cs cd ~/.local/share
 cmd open ${{
   case $(file --mime-type "$f" -bL) in
     text/*|application/json) $EDITOR "$f";;
-    video/*|image/*/application/pdf) swallow xdg-open "$f";;
-    *) swallow xdg-open "$f" ;;
+    video/*|image/*/application/pdf) xdg-open "$f";;
+    *) xdg-open "$f" ;;
   esac
 }}
 
