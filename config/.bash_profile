@@ -4,7 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export WM="sway"
+export WM="river"
 export EDITOR="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
@@ -28,9 +28,9 @@ if [ -n "$DESKTOP_SESSION" ];then
   export SSH_AUTH_SOCK
 fi
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-  exec sway
-fi
+# if [ "$(tty)" = "/dev/tty1" ]; then
+#   exec sway
+# fi
 
 # if [ "$(tty)" = "/dev/tty1" ]; then
 # 	exec dwl -s dwlapps
@@ -39,3 +39,7 @@ fi
 # if [ "$(tty)" = "/dev/tty1" ]; then
 # 	exec kiwmi
 # fi
+
+if [ "$(tty)" = "/dev/tty1" ]; then
+  exec river
+fi
