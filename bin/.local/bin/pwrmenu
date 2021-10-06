@@ -6,7 +6,7 @@ shutdown" | bemenu -p "Power Menu:" --tf "#282828" --tb "#FB4934" --fb "#282828"
 [[ -z $option ]] && exit
 
 case $option in
-  logout) killall sway ;;
+  logout) killall river ;;
   restart) sudo reboot ;;
   shutdown) sudo poweroff ;;
 esac
