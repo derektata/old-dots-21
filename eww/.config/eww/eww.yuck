@@ -1,0 +1,91 @@
+(deflisten title `ristate -w | jq .title -r --unbuffered`)
+
+(defpoll network :interval "10s"
+  "./scripts/network")
+
+(defpoll volume :interval "1s"
+  "./scripts/volume")
+
+(defpoll battery :interval "5s"
+  "./scripts/powah.py")
+
+(defpoll time :interval "10s"
+  "date '+%a, %b %d   %l:%M %P'")
+
+(defwidget title-info[]
+    (box
+        :class "title-info"
+        :space-evenly true
+    (label :limit-width 50 :text {title ?: " "} :class "title-text")))
+
+(defwidget workspaces []
+  (box :class "workspaces"
+       :orientation "h"
+       :space-evenly true
+       :spacing 10
+    (button :onclick "riverctl set-focused-tags 1" 1)
+    (button :onclick "riverctl set-focused-tags 2" 2)
+    (button :onclick "riverctl set-focused-tags 4" 3)
+    (button :onclick "riverctl set-focused-tags 8" 4)
+    (button :onclick "riverctl set-focused-tags 16" 5)
+    (button :onclick "riverctl set-focused-tags 32" 6)
+    (button :onclick "riverctl set-focused-tags 64" 7)
+    (button :onclick "riverctl set-focused-tags 128" 8)
+    (button :onclick "riverctl set-focused-tags 256" 9)))
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+(defwidget left[]
+	(box
+		:halign "start"
+    :space-evenly false
+    :spacing 20
+    (workspaces)
+    (title-info)
+		))
+
+(defwidget center[]
+	(box
+		:halign "center"
+		time
+    ))
+
+(defwidget right[]
+  (box
+    :halign "end"
+    :space-evenly false
+    :spacing 20
+    network
+    volume
+    battery
+    ))
+
+(defwidget river-bar[]
+	(centerbox :orientation "h"
+	(left)
+	(center)
+	(right)))
+
+(defwindow river-bar
+           :monitor 0
+           :exclusive "true"
+           :focusable "false"
+           :stacking "bg"
+           :geometry (geometry :x "0%"
+                               :y "0%"
+                               :width "100%"
+                               :height "30px"
+                               :anchor "top center")
+           :reserve (struts :distance "40px" :side "top")
+           :windowtype "dock"
+           :wm-ignore false
+  (river-bar))
