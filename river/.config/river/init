@@ -13,6 +13,7 @@ riverctl spawn waybar
 riverctl spawn gamma
 riverctl spawn bluetoof
 riverctl spawn mako
+riverctl spawn ydotoold
 riverctl spawn "dbus-update-activation-environment --systemd --all"
 riverctl spawn "brightnessctl s 65%"
 
@@ -23,7 +24,7 @@ riverctl spawn "swaybg -i ~/.local/share/backgrounds/spacesurf.png"
 mod="Mod4"
 
 # Mod+Shift+Return to start an instance of foot (https://codeberg.org/dnkl/foot)
-riverctl map normal $mod+Shift Return spawn alacritty
+riverctl map normal $mod+Shift Return spawn foot
 
 # Mod+Q to close the focused view
 riverctl map normal $mod Q close
