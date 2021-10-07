@@ -4,9 +4,8 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export WM="river"
 export EDITOR="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="foot"
 export BROWSER="firefox"
 export PAGER="bat --paging always"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -30,14 +29,6 @@ fi
 
 # if [ "$(tty)" = "/dev/tty1" ]; then
 #   exec sway
-# fi
-
-# if [ "$(tty)" = "/dev/tty1" ]; then
-# 	exec dwl -s dwlapps
-# fi
-
-# if [ "$(tty)" = "/dev/tty1" ]; then
-# 	exec kiwmi
 # fi
 
 if [ "$(tty)" = "/dev/tty1" ]; then
