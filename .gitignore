@@ -4,7 +4,6 @@ my-fonts/
 personal/
 
 # Other stuff
-eww/
 nvim/.config/nvim/plugin
 bin/.local/bin/pkg
 bin/.local/bin/LICENSE
