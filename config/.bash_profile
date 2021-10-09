@@ -27,10 +27,6 @@ if [ -n "$DESKTOP_SESSION" ];then
   export SSH_AUTH_SOCK
 fi
 
-# if [ "$(tty)" = "/dev/tty1" ]; then
-#   exec sway
-# fi
-
 if [ "$(tty)" = "/dev/tty1" ]; then
   exec river
 fi
