@@ -37,7 +37,7 @@ riverctl map normal $mod+Escape spawn screenlock
 riverctl map normal $mod+Shift E spawn pwrmenu
 
 # Mod+D to open bemenu
-riverctl map normal $mod D spawn 'bemenu-run -p "Run:" --tf "#282828" --tb "#FABD2F" --fb "#282828" --nb "#282828" --hf "#FABD2F" --hb "#282828"'
+riverctl map normal $mod D spawn 'bemenu-run -p "Run:" --tf "#282828" --tb "#FABD2F" --fb "#282828" --nb "#282828" --hf "#FABD2F" --hb "#282828" -H 30'
 
 # Mod+E to open emoji picker
 riverctl map normal $mod E spawn emoji
