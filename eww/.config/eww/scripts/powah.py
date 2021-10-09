@@ -16,19 +16,19 @@ time_left = battery.secsleft
 def icon():
     if(plugged == None):
         if(percent >= 100):
-            return ("🤍")
+            return ("")
         elif(percent < 100):
-            return ("🔌")
+            return ("")
     elif(plugged == True):
         if(percent >= 100):
-            return ("🤍")
+            return ("")
         elif(percent < 100):
-            return ("🔌")
+            return ("")
     elif(plugged == False):
         if(percent >= 100):
-            return ("🤍")
+            return ("")
         elif(percent < 100):
-            return ("🔋")
+            return ("")
 
 def percentf():
     percent_formatted = format(percent, '.0f')
@@ -36,7 +36,7 @@ def percentf():
 
 def time_remaining():
     if(time_left <= -0):
-        return("Plugged in 🔌") 
+        return("Plugged in ")
     else:
        min = (time_left / 60)
        hr = (min / 60)
@@ -44,7 +44,7 @@ def time_remaining():
        return (formatted_hr + " hrs")
 
 def powah():
-    print(icon(), end=" ") 
+    print(icon(), end=" ")
     print(percentf())
     # print(time_remaining())
 

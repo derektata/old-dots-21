@@ -3,9 +3,8 @@
 NET=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
 SSID=$(nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2 | awk -F: '{ print $2 }')
 
-if [ ! $NET ]; then
-  echo 📡 "No Wifi"
+if [ ! "$NET" ]; then
+  echo " No Wifi"
 else
-  # echo $NET
-  echo 🌎 $SSID
+  echo "  $SSID"
 fi
