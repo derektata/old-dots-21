@@ -3,36 +3,38 @@
 
     "modules-left": [
       "river/tags",
-    "sway/workspaces",
-    "sway/window",
-    "sway/mode"
+      "custom/window-title",
+
+      "sway/workspaces",
+      "sway/window",
+      "sway/mode"
     ],
 
     "modules-center": [
       "custom/left-arrow-gray",
-    "clock#1",
-    "custom/right-arrow-gray",
-    "custom/left-arrow-gray",
-    "clock#2",
-    "custom/right-arrow-gray",
-    "custom/left-arrow-gray",
-    "clock#3",
-    "custom/right-arrow-gray"
+      "clock#1",
+      "custom/right-arrow-gray",
+      "custom/left-arrow-gray",
+      "clock#2",
+      "custom/right-arrow-gray",
+      "custom/left-arrow-gray",
+      "clock#3",
+      "custom/right-arrow-gray"
     ],
 
     "modules-right": [
       "custom/semicircle-separator",
-    "network",
-    "custom/light-semicircle-separator",
-    "pulseaudio",
-    "custom/dark-semicircle-separator",
-    "battery",
-    "custom/light-semicircle-separator",
-    "tray"
+      "network",
+      "custom/light-semicircle-separator",
+      "pulseaudio",
+      "custom/dark-semicircle-separator",
+      "battery",
+      "custom/light-semicircle-separator",
+      "tray"
     ],
 
     "sway/window": {
-      "max-length": 50
+      "max-length": 45
     },
 
     "battery": {
@@ -80,6 +82,13 @@
 
     "river/tags": {
       "num-tags" : 9
+    },
+
+    "custom/window-title" : {
+      "exec-if": "pgrep river",
+      "exec": "ristate -w | jq '.title' -r --unbuffered",
+      "max-length": 45,
+      "tooltip": false
     },
 
     "custom/left-arrow-gray": {
