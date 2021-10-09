@@ -9,11 +9,12 @@
 # documentation.
 
 # Autostart apps
-riverctl spawn waybar
 riverctl spawn gamma
-riverctl spawn bluetoof
 riverctl spawn mako
+riverctl spawn bluetoof
 riverctl spawn ydotoold
+riverctl spawn "eww open river-bar"
+# riverctl spawn waybar
 riverctl spawn "dbus-update-activation-environment --systemd --all"
 riverctl spawn "brightnessctl s 65%"
 
