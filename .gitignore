@@ -4,6 +4,8 @@ my-fonts/
 personal/
 
 # Other stuff
+eww/.config/eww/scripts/gh-notify/
+eww/.config/eww/scripts/github
 nvim/.config/nvim/plugin
 bin/.local/bin/pkg
 bin/.local/bin/LICENSE
