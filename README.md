@@ -6,6 +6,7 @@ dotfiles for my comfy linux abode
 
 ## Features
 
+- stow for dotfile mgmt
 - wayland apps
 - terminal based workflow
 - menus based on [fzf]
@@ -14,9 +15,5 @@ dotfiles for my comfy linux abode
   - run node scripts
   - switch git branches
   - and more!
-
-## Setup
-
-The `setup` script is intended to be used with systems running Arch based distributions, and uses `stow` under the hood to deploy my dotfiles. It also comes with an automated AUR installer 🙂
 
 [fzf]:https://github.com/junegunn/fzf
