@@ -1,10 +1,11 @@
 (deflisten title `ristate -w | jq .title -r --unbuffered`)
 (deflisten tags `ristate -t | jq '.tags[]["ChimeiInnoluxCorporation"][]' -r --unbuffered`)
 
+(defpoll github :interval "300s" "./scripts/github")
 (defpoll volume :interval "1s" "./scripts/volume")
 (defpoll network :interval "5s" "./scripts/network")
 (defpoll battery :interval "5s" "./scripts/powah.py")
-(defpoll time :interval "1s" "date '+  %a, %b %d    %l:%M %P'")
+(defpoll time :interval "1s" "date '+  %a, %b %d   %l:%M %P'")
 
 (defwidget workspaces []
   (box :class "workspaces"
@@ -22,58 +23,57 @@
     (button :onclick "riverctl set-focused-tags 256" 9)))
 
 (defwidget title-info[]
-    (box
-        :class "title-info"
-        :space-evenly false
+    (box :class "title-info"
+         :space-evenly false
         (label :text {tags == "11" ? "Workspace" : tags == "10" ? "Scratchpad" : "${tags}"})
     (label :limit-width 45 :text {title ?: " "})))
 
 (defwidget clock[]
-(box :class "clock"
-     :orientation "h"
-     time))
+  (box :class "clock"
+       :orientation "h"
+       time))
+
+(defwidget github[]
+  (box :class "github"
+       :orientation "h"
+       github))
 
 (defwidget wifi[]
-  (box
-    :class "wifi"
-    :orientation "h"
-    network))
+  (box :class "wifi"
+       :orientation "h"
+       network))
 
 (defwidget vol[]
-  (box
-    :class "vol"
-    :orientation "h"
-    volume))
+  (box :class "vol"
+       :orientation "h"
+       volume))
 
 (defwidget battery[]
-  (box
-    :class "battery"
-    :orientation "h"
-    battery))
+  (box :class "battery"
+       :orientation "h"
+       battery))
 
 
 ;;;; Polybar-like config ;;;;
 
 (defwidget left[]
-	(box
-		:halign "start"
-    :space-evenly false
-    (workspaces)
-    (title-info)))
+	(box :halign "start"
+       :space-evenly false
+       (workspaces)
+       (title-info)))
 
 (defwidget center[]
-	(box
-		:halign "center"
-		(clock)))
+	(box :halign "center"
+		   (clock)))
 
 (defwidget right[]
-  (box
-    :halign "end"
-    :space-evenly false
-    :spacing 20
-    (wifi)
-    (vol)
-    (battery)))
+  (box :halign "end"
+       :space-evenly false
+       :spacing 20
+       (github)
+       (wifi)
+       (vol)
+       (battery)))
 
 (defwidget river-bar[]
 	(centerbox :orientation "h"

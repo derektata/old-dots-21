@@ -16,19 +16,19 @@ time_left = battery.secsleft
 def icon():
     if(plugged == None):
         if(percent >= 100):
-            return ("")
+            return (" ")
         elif(percent < 100):
-            return ("")
+            return (" ")
     elif(plugged == True):
         if(percent >= 100):
-            return ("")
+            return (" ")
         elif(percent < 100):
-            return ("")
+            return (" ")
     elif(plugged == False):
         if(percent >= 100):
-            return ("")
+            return (" ")
         elif(percent < 100):
-            return ("")
+            return (" ")
 
 def percentf():
     percent_formatted = format(percent, '.0f')
