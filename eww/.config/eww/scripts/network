@@ -1,10 +1,9 @@
 #!/bin/sh
 
-NET=$(ip route get 1.1.1.1 | grep -Po '(?<=dev\s)\w+' | cut -f1 -d ' ')
 SSID=$(nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2 | awk -F: '{ print $2 }')
 
-if [ ! "$NET" ]; then
-  echo " No Wifi"
-else
+if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
   echo "  $SSID"
+else
+  echo " No Wifi"
 fi
