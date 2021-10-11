@@ -206,6 +206,7 @@ cmd git_branch ${{
   lf -remote "send $id cd \"$pwd_shell\""
 }}
 
+
 cmd on-cd &{{
 # display git repository status in your prompt
   source /usr/share/git/completion/git-prompt.sh
@@ -248,3 +249,4 @@ map f
 map m
 map n
 map o
+map gh
