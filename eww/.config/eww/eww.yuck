@@ -1,3 +1,5 @@
+; TODO: Highlight active desktop, and hide the others
+
 (deflisten title `ristate -w | jq .title -r --unbuffered`)
 (deflisten tags `ristate -t | jq '.tags[]["ChimeiInnoluxCorporation"][]' -r --unbuffered`)
 
