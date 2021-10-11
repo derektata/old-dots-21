@@ -194,5 +194,7 @@ return packer.startup(function()
   -- Table Mode
   use { "dhruvasagar/vim-table-mode" }
 
+  -- Yuck file support
+  use { "elkowar/yuck.vim" }
 
 end)
