@@ -61,6 +61,8 @@ map cN cd ~/docs/notes
 map cr cd ~/repos
 map cs cd ~/.local/share
 
+# Node Scripts Mappings
+map ns node_script
 
 # General file system commands
 cmd open ${{
@@ -228,6 +230,11 @@ cmd fzf_jump ${{
   fi
 
   lf -remote "send $id $cmd \"$res\""
+}}
+
+# Node Scripts
+cmd node_script ${{
+  script=$(cat package.json | jq -r '.scripts | keys[] ' | sort | fzf --height 20%) && npm run $(echo "$script")
 }}
 
 
