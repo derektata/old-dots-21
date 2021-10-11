@@ -4,7 +4,7 @@
 (deflisten tags `ristate -t | jq '.tags[]["ChimeiInnoluxCorporation"][]' -r --unbuffered`)
 
 (defpoll time :interval "1s" "date '+  %a, %b %d   %l:%M %P'")
-(defpoll github :interval "30s" "./scripts/github")
+(defpoll github :interval "5s" "./scripts/github")
 (defpoll network :interval "5s" "./scripts/network")
 (defpoll volume :interval "5s" "./scripts/volume")
 (defpoll battery :interval "5s" "./scripts/powah")
