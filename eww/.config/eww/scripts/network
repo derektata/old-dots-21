@@ -1,9 +1,10 @@
 #!/bin/sh
 
+NET=$(cat < /dev/null > /dev/tcp/8.8.8.8/53; echo $?)
 SSID=$(nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2 | awk -F: '{ print $2 }')
 
-if ping -q -c 1 -W 1 8.8.8.8 >/dev/null; then
-  echo "  $SSID"
-else
+if [ "$NET" -gt 0 ]; then
   echo " No Wifi"
+else
+  echo "  $SSID"
 fi
