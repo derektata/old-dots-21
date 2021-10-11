@@ -11,6 +11,6 @@ scripts/
 └── volume
 ```
 
-The `github` script is a module to show me how many unread notifications I have and uses `gh-notify` under the hood.
+The `github` script is a module to show me how many unread notifications I have and uses [gh-notify] under the hood.
 
-I'm still testing `gh-notify` and will release it once I feel it's ready.
+[gh-notify]:https://github.com/derektata/gh-notify
