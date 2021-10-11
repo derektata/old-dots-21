@@ -1,10 +1,9 @@
 #!/bin/sh
 
-NET=$(cat < /dev/null > /dev/tcp/8.8.8.8/53; echo $?)
-SSID=$(nmcli -t -f active,ssid dev wifi | egrep '^yes' | cut -d\' -f2 | awk -F: '{ print $2 }')
+WIFI=$(cat /sys/class/net/w*/operstate 2>/dev/null)
+SSID=$(nmcli -t -f active,ssid dev wifi | grep -E '^yes' | cut -d\' -f2 | awk -F: '{ print $2 }')
 
-if [ "$NET" -gt 0 ]; then
-  echo " No Wifi"
-else
-  echo "  $SSID"
-fi
+case "$WIFI" in
+  up) echo "  $SSID" ;;
+  down) echo " No Wifi" ;;
+esac
