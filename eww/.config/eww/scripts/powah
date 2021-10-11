@@ -3,7 +3,19 @@
 for battery in /sys/class/power_supply/BAT?*; do
   case "$(cat "$battery/status" 2>&1)" in
     "Full")         status="  " ;;
-    "Discharging")  status="  " ;;
+    "Discharging")
+      if [ "$(cat "$battery/capacity")" -le 100 ]; then
+        status="  "
+      elif [ "$(cat "$battery/capacity")" -le 75 ]; then
+        status="  "
+      elif [ "$(cat "$battery/capacity")" -le 50 ]; then
+        status="  "
+      elif [ "$(cat "$battery/capacity")" -le 25 ]; then
+        status="  "
+      elif [ "$(cat "$battery/capacity")" -le 10 ]; then
+        status="  "
+      fi
+      ;;
     "Charging")     status="  " ;;
     "Not charging") status="  " ;;
     "Unknown")      status="  " ;;
