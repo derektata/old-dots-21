@@ -169,6 +169,3 @@ nmcli -f 'bssid,signal,bars,freq,ssid' --color yes device wifi |
   --header-lines=1 \
   --bind="enter:execute:nmcli -a device wifi connect {1}"
 }
-
-
-
