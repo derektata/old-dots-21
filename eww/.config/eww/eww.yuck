@@ -1,7 +1,8 @@
-; TODO: Highlight active desktop, and hide the others
+; TODO: Highlight active desktop ☑️, and hide the others
 
 (deflisten title `ristate -w | jq .title -r --unbuffered`)
-(deflisten tags `ristate -t | jq '.tags[]["ChimeiInnoluxCorporation"][]' -r --unbuffered`)
+(deflisten current-tag `ristate -t | jq '.tags[]["Unknown"][]' -r --unbuffered`)
+; (deflisten occupied-tag `ristate -vt | jq '.viewstag[]["Unknown"][]' -r --unbuffered`)
 
 (defpoll time :interval "1s" "date '+  %a, %b %d   %l:%M %P'")
 (defpoll github :interval "5s" "./scripts/github")
@@ -9,20 +10,38 @@
 (defpoll volume :interval "1s" "./scripts/volume")
 (defpoll battery :interval "1s" "./scripts/powah")
 
-(defwidget workspaces []
+(defwidget tags []
   (box :class "workspaces"
        :orientation "h"
        :space-evenly true
        :spacing 10
-    (button :onclick "riverctl set-focused-tags 1"   1)
-    (button :onclick "riverctl set-focused-tags 2"   2)
-    (button :onclick "riverctl set-focused-tags 4"   3)
-    (button :onclick "riverctl set-focused-tags 8"   4)
-    (button :onclick "riverctl set-focused-tags 16"  5)
-    (button :onclick "riverctl set-focused-tags 32"  6)
-    (button :onclick "riverctl set-focused-tags 64"  7)
-    (button :onclick "riverctl set-focused-tags 128" 8)
-    (button :onclick "riverctl set-focused-tags 256" 9)))
+    (button :onclick "riverctl set-focused-tags 1"
+            :class { current-tag == 1 ? "tag-active" : "tag-inactive" }
+    (label :text "1"))
+    (button :onclick "riverctl set-focused-tags 2"
+            :class { current-tag == 2 ? "tag-active" : "tag-inactive" }
+    (label :text "2"))
+    (button :onclick "riverctl set-focused-tags 4"
+            :class { current-tag == 3 ? "tag-active" : "tag-inactive" }
+    (label :text "3"))
+    (button :onclick "riverctl set-focused-tags 8"
+            :class { current-tag == 4 ? "tag-active" : "tag-inactive" }
+    (label :text "4"))
+    (button :onclick "riverctl set-focused-tags 16"
+            :class { current-tag == 5 ? "tag-active" : "tag-inactive" }
+    (label :text "5"))
+    (button :onclick "riverctl set-focused-tags 32"
+            :class { current-tag == 6 ? "tag-active" : "tag-inactive" }
+    (label :text "6"))
+    (button :onclick "riverctl set-focused-tags 64"
+            :class { current-tag == 7 ? "tag-active" : "tag-inactive" }
+    (label :text "7"))
+    (button :onclick "riverctl set-focused-tags 128"
+            :class { current-tag == 8 ? "tag-active" : "tag-inactive" }
+    (label :text "8"))
+    (button :onclick "riverctl set-focused-tags 256"
+            :class { current-tag == 9 ? "tag-active" : "tag-inactive" }
+    (label :text "9"))))
 
 (defwidget title-info[]
     (box :class "title-info"
@@ -60,7 +79,7 @@
 (defwidget left[]
 	(box :halign "start"
        :space-evenly false
-       (workspaces)
+       (tags)
        (title-info)))
 
 (defwidget center[]
