@@ -14,20 +14,19 @@
        :orientation "h"
        :space-evenly true
        :spacing 10
-    (button :onclick "riverctl set-focused-tags 1" 1)
-    (button :onclick "riverctl set-focused-tags 2" 2)
-    (button :onclick "riverctl set-focused-tags 4" 3)
-    (button :onclick "riverctl set-focused-tags 8" 4)
-    (button :onclick "riverctl set-focused-tags 16" 5)
-    (button :onclick "riverctl set-focused-tags 32" 6)
-    (button :onclick "riverctl set-focused-tags 64" 7)
+    (button :onclick "riverctl set-focused-tags 1"   1)
+    (button :onclick "riverctl set-focused-tags 2"   2)
+    (button :onclick "riverctl set-focused-tags 4"   3)
+    (button :onclick "riverctl set-focused-tags 8"   4)
+    (button :onclick "riverctl set-focused-tags 16"  5)
+    (button :onclick "riverctl set-focused-tags 32"  6)
+    (button :onclick "riverctl set-focused-tags 64"  7)
     (button :onclick "riverctl set-focused-tags 128" 8)
     (button :onclick "riverctl set-focused-tags 256" 9)))
 
 (defwidget title-info[]
     (box :class "title-info"
          :space-evenly false
-        (label :text {tags == "11" ? "Workspace" : tags == "10" ? "Scratchpad" : "${tags}"})
     (label :limit-width 45 :text {title ?: " "})))
 
 (defwidget clock[]
