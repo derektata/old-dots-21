@@ -4,7 +4,7 @@ for battery in /sys/class/power_supply/BAT?*; do
   case "$(cat "$battery/status" 2>&1)" in
     "Full") status="  " ;;
     "Discharging")
-      if [ "$(cat "$battery/capacity")" -gt 75 ]; then
+      if [ "$(cat "$battery/capacity")" -gt 80 ]; then
         status="  "
       elif [ "$(cat "$battery/capacity")" -gt 50 ]; then
         status="  "
