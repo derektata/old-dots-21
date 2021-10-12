@@ -3,11 +3,11 @@
 (deflisten title `ristate -w | jq .title -r --unbuffered`)
 (deflisten tags `ristate -t | jq '.tags[]["ChimeiInnoluxCorporation"][]' -r --unbuffered`)
 
-(defpoll time :interval "0s" "date '+  %a, %b %d   %l:%M %P'")
+(defpoll time :interval "1s" "date '+  %a, %b %d   %l:%M %P'")
 (defpoll github :interval "5s" "./scripts/github")
-(defpoll network :interval "0s" "./scripts/network")
-(defpoll volume :interval "0s" "./scripts/volume")
-(defpoll battery :interval "0s" "./scripts/powah")
+(defpoll network :interval "5s" "./scripts/network")
+(defpoll volume :interval "1s" "./scripts/volume")
+(defpoll battery :interval "1s" "./scripts/powah")
 
 (defwidget workspaces []
   (box :class "workspaces"
