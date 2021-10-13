@@ -33,6 +33,8 @@ riverctl map normal $mod Q close
 # Mod+Escape to lock the screen
 riverctl map normal $mod+Escape spawn screenlock
 
+riverctl map normal $mod+Shift R spawn 'eww reload'
+
 # Mod+Shift+E to exit river
 riverctl map normal $mod+Shift E spawn pwrmenu
 
