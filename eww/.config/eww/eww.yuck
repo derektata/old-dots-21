@@ -11,7 +11,7 @@
 (defpoll battery :interval "1s" "./scripts/powah")
 
 (defwidget tags []
-  (box :class "workspaces"
+  (box :class "tags"
        :orientation "h"
        :space-evenly true
        :spacing 10
