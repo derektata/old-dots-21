@@ -155,7 +155,6 @@ cmd tar ${{
     mkdir "$f"
     cp -r "$f" "$f"
     tar czf "$f.tar.gz" "$f"
-    rm -rf "$f"
 }}
 
 # compress current file or selected files with zip
@@ -164,7 +163,6 @@ cmd zip ${{
     mkdir "$f"
     cp -r "$f" "$f"
     zip -r "$f.zip" "$f"
-    rm -rf "$f"
 }}
 
 # encrypt a file using openssl
