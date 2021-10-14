@@ -41,6 +41,14 @@ return packer.startup(function()
     requires = "nvim-lua/plenary.nvim",
   }
 
+  -- Filetype.nvim
+  use {
+    "nathom/filetype.nvim",
+    config = function()
+      vim.g.did_load_filetypes =1
+    end
+  }
+
   -- LSP
   use {
     "neovim/nvim-lspconfig",
@@ -196,5 +204,6 @@ return packer.startup(function()
 
   -- Yuck file support
   use { "elkowar/yuck.vim" }
+
 
 end)
