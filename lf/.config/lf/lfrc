@@ -57,6 +57,7 @@ map gb :git_branch
 map gl ${{clear; git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit}}
 map gp ${{clear; git pull --rebase || true; echo "press ENTER"; read ENTER}}
 map gs ${{clear; git status; echo "press ENTER"; read ENTER}}
+map gd ${{clear; git diff .; echo "press ENTER"; read -r}}
 
 
 # Node Scripts Mappings
