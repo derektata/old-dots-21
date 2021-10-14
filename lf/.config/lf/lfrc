@@ -249,7 +249,13 @@ cmd fzf_jump ${{
 
 # Node Scripts
 cmd node_script ${{
-  script=$(cat package.json | jq -r '.scripts | keys[] ' | sort | fzf --height 20%) && npm run $(echo "$script")
+  if command -v yarn 2>/dev/null; then
+    # use yarn
+    script=$(cat package.json | jq -r '.scripts | keys[] ' | sort | fzf --height 20%) && yarn run $(echo "$script")
+  else
+    # use npm
+    script=$(cat package.json | jq -r '.scripts | keys[] ' | sort | fzf --height 20%) && npm run $(echo "$script")
+  fi
 }}
 
 
