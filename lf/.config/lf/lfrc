@@ -44,8 +44,7 @@ map ae extract
 
 
 # Encryption Mappings
-map ce encrypt
-map cd decrypt
+map cc crypt
 
 
 # Fuzzy Mappings
@@ -168,21 +167,13 @@ cmd zip ${{
     rm -rf "$f"
 }}
 
-# encrypt a file using gpg
-cmd encrypt ${{
-  printf "\n Recipient: "
-  read -r ans
+# encrypt a file using openssl
+cmd crypt ${{
   set -f
-    gpg -r "$ans" -e "$f"
-}}
-
-# decrypt a file using gpg
-cmd decrypt ${{
-  clear
-  set -f
-    gpg -d "$f"
-    read -r
-  clear
+    case "$f" in
+      *.gpg) gpg "$f" ;;
+      *) gpg -c "$f" ;;
+    esac
 }}
 
 # Trash Commands
