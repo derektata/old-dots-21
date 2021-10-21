@@ -45,7 +45,7 @@ return packer.startup(function()
   use {
     "nathom/filetype.nvim",
     config = function()
-      vim.g.did_load_filetypes =1
+      vim.g.did_load_filetypes = 1
     end
   }
 
@@ -53,7 +53,7 @@ return packer.startup(function()
   use {
     "neovim/nvim-lspconfig",
     requires = {
-      "kabouzeid/nvim-lspinstall",
+      "williamboman/nvim-lsp-installer",
       "onsails/lspkind-nvim",
       "glepnir/lspsaga.nvim",
     },
