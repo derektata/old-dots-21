@@ -46,7 +46,7 @@ alias rec='wf-recorder'
 alias recs='wf-recorder -g "$(slurp)"'
 alias reca='wf-recorder --audio --file=audio.mp4'
 
-# Python Virtual Environment 
+# Python Virtual Environment
 alias actv='source venv/bin/activate'
 alias dactv='deactivate'
 
@@ -57,6 +57,8 @@ alias update-grub='sudo grub-mkconfig -o /boot/grub/grub.cfg'
 # Weather
 alias wx='curl wttr.in'
 
+# Anime
+alias anime='ani-cli'
+
 # ArcWelder
 alias aw='~/.local/share/ArcWelder/bin/ArcWelder'
-
