@@ -205,5 +205,8 @@ return packer.startup(function()
   -- Yuck file support
   use { "elkowar/yuck.vim" }
 
+  -- emmet
+  use { "mattn/emmet-vim" }
+
 
 end)
