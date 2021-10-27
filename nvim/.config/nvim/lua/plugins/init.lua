@@ -185,12 +185,6 @@ return packer.startup(function()
     end,
   }
 
-  -- Glow (Markdown Preview)
-  use {
-    "npxbr/glow.nvim",
-    run = "GlowInstall",
-  }
-
   -- Toggle wrap like in VS Code
   use {
     "derektata/wrap-toggle.nvim",
